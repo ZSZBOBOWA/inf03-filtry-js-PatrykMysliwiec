@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efekty obrazu</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h2>Efekty na obrazach</h2>
+    </header>
+    <main>
+        <section class="pierwszyBlok">
+            <img src="./pszczola.jpg" alt="pszczoła na fioletowym kwiatku"><br>
+            <input type="radio" name="radioSelect" id="blur">Blur<br>
+            <input type="radio" name="radioSelect" id="sepiaRadio">Sepia<br>
+            <input type="radio" name="radioSelect" id="negativeRadio">Negatyw<br>
+            <button id="applyButton1">Zastosuj</button>
+        </section>
+        <section class="drugiBlok">
+            <img src="./pomarancza.jpg" alt="drzewo pomarańczy">
+            <button id="colorButton">Kolorowy</button>
+            <button id="grayscaleButton">Czarno-biały</button>
+        </section>
+        <section class="trzeciBlok">
+            <img src="./owoce.jpg" alt="Kosz pełen owoców">
+            <input type="range" name="owoce" id="rangeInput1" min="0" max="250">
+            <button id="applyButton3">Zastosuj</button>
+        </section>
+        <section class="czwartyBlok">
+            <img src="./zolw.jpg" alt="Żółw w wodzie">
+            <input type="range" name="żółw" id="rangeInput2" min="0" max="250">
+            <button id="applyButton4">Zastosuj</button>
+        </section>
+    </main>
+    <footer>
+        <p><a href="http://www.css.com/" target="_blank">Zobacz inne efekty obrazu</a></p>
+        <p>Stronę wykonał: numer zdającego</p>
+    </footer>
+    <script>
+        // Transformacje dla obrazu 1
+        document.getElementById('applyButton1').addEventListener('click', () => {
+            const blurRadio = document.getElementById('blur');
+            const sepiaRadio = document.getElementById('sepiaRadio');
+            const negativeRadio = document.getElementById('negativeRadio');
+            const image = document.querySelector('.pierwszyBlok img');
+
+            if (blurRadio.checked) {
+                image.style.filter = 'blur(6px)'; // wartość z przedziału 4px - 8px
+            } else if (sepiaRadio.checked) {
+                image.style.filter = 'sepia(100%)';
+            } else if (negativeRadio.checked) {
+                image.style.filter = 'invert(100%)';
+            }
+        });
+
+        // Transformacje dla obrazu 2
+        document.getElementById('colorButton').addEventListener('click', () => {
+            const image = document.querySelector('.drugiBlok img');
+            image.style.filter = 'none'; // Zdejmowanie filtra
+        });
+
+        document.getElementById('grayscaleButton').addEventListener('click', () => {
+            const image = document.querySelector('.drugiBlok img');
+            image.style.filter = 'grayscale(100%)';
+        });
+
+        // Transformacje dla obrazu 3
+        document.getElementById('applyButton3').addEventListener('click', () => {
+            const sliderValue = document.getElementById('rangeInput1').value;
+            const image = document.querySelector('.trzeciBlok img');
+            image.style.filter = `opacity(${sliderValue}%)`;
+        });
+
+        // Transformacje dla obrazu 4
+        document.getElementById('applyButton4').addEventListener('click', () => {
+            const sliderValue = document.getElementById('rangeInput2').value;
+            const image = document.querySelector('.czwartyBlok img');
+            image.style.filter = `brightness(${sliderValue}%)`;
+        });
+    </script>
+</body>
+</html>
